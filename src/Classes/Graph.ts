@@ -1,5 +1,31 @@
 import GraphNode from "./GraphNode";
-
+/**
+ *
+ * @class Graph
+ *
+ * @description A class to represent a graph data structure with nodes and edges (nodes has directional edges to other nodes)
+ *
+ * @method getNodes - returns an array of all nodes in the graph
+ * @method addNode - adds a node to the graph
+ * @method setVertexValue - sets the weight of the edge between two nodes
+ *
+ * @property {GraphNode[]} #nodes - an array of GraphNode objects
+ *
+ * @example
+ * const graph = new Graph();
+ *
+ * graph.addNode("A");
+ * graph.addNode("B");
+ * graph.addNode("C");
+ *
+ * graph.setVertexValue("A", "B", 4);
+ *
+ * console.log(graph.getNodes());
+ * @returns {GraphNode[]} - an array of GraphNode objects
+ *
+ * @see GraphNode
+ *
+ */
 export default class Graph {
 
     #nodes: GraphNode[];
@@ -34,8 +60,8 @@ export default class Graph {
         if (nodeTo === undefined){
             throw new Error("addVertex requires nodeTo");
         }
-        if (weight === undefined){
-            throw new Error("addVertex requires weight");
+        if (weight === undefined || weight < 0){
+            throw new Error("addVertex requires a positive weight");
         }
         const nodeFromIndex = this.#nodes.findIndex((node) => node.name === nodeFrom);
         if (nodeFromIndex === -1){
