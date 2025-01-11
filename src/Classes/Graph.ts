@@ -13,6 +13,11 @@ export default class Graph {
     }
 
     addNode(nodeName: string) {
+
+        if (nodeName === undefined) {
+            throw new Error("addNode requires a nodeName");
+        }
+
         const newLength = this.#nodes.length + 1;
         this.#nodes.forEach((node) => {
             node.values.push(0);
