@@ -27,4 +27,28 @@ export default class Graph {
         return newNode;
     }
 
+    setVertexValue(nodeFrom: string, nodeTo: string, weight: number) {
+        if (nodeFrom === undefined){
+            throw new Error("addVertex requires nodeFrom");
+        }
+        if (nodeTo === undefined){
+            throw new Error("addVertex requires nodeTo");
+        }
+        if (weight === undefined){
+            throw new Error("addVertex requires weight");
+        }
+        const nodeFromIndex = this.#nodes.findIndex((node) => node.name === nodeFrom);
+        if (nodeFromIndex === -1){
+            throw new Error("nodeFrom not found");
+        }
+        const nodeToIndex = this.#nodes.findIndex((node) => node.name === nodeTo);
+        if (nodeToIndex === -1){
+            throw new Error("nodeTo not found");
+        }
+
+        this.#nodes[nodeFromIndex].values[nodeToIndex] = weight;
+
+        return this.#nodes[nodeFromIndex];
+    }
+
 }
